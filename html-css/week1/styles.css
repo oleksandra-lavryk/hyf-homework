@@ -1,0 +1,157 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #202020;
+  background-color: rgb(255 204 78 / 10%);
+}
+.container{
+  margin: 0 auto;
+}
+header{
+  padding: 30px;
+  border-bottom: 10px solid #ffcc4e;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-gap: 20px;
+}
+header > div:first-child img{
+  max-width: 100%;
+  border-radius: 50%;
+}
+header > div:nth-child(2){
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+h1{
+  font-size: 56px;
+}
+h1 span{
+ color: #ffcc4e;
+ text-shadow: 3px 2px 0px #202020;
+}
+.cv-section-heading{
+  font-size: 34px;
+  text-transform: uppercase;
+  margin: 20px 0;
+  text-shadow: 3px 3px 0px #ffcc4e;
+}
+.cv-common-text{
+  line-height: 28px;
+}
+.personal-info > div > div{
+  display: flex;
+}
+.personal-info-attribute,
+.personal-info-value,
+.education-year{
+  font-size: 18px;
+  line-height: 30px;
+}
+.personal-info-attribute{
+  text-transform: uppercase;
+  font-weight: 700;
+  width: 120px;
+}
+.education > div > div:not(:last-child){
+  margin-bottom: 15px;
+}
+.education-year{
+  font-weight: 700;
+}
+.additional-info{
+  padding-bottom: 50px;
+}
+h3{
+  text-transform: uppercase;
+  margin: 20px 0;
+}
+.additional-info-list{
+  list-style-type: square;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+.additional-info-list li a,
+.additional-info-list li a:visited{
+  color: #202020;
+}
+.additional-info-list li a {
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.additional-info-list li a:hover{
+  text-decoration: underline;
+}
+.additional-socials-list ul{
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+.additional-socials-list ul li:not(:last-child){
+  margin-right: 10px;
+}
+.additional-socials-list ul li a svg{
+  width: 24px;
+}
+.additional-socials-list ul li a svg path{
+  fill: #202020;
+}
+.additional-socials-list ul li a:hover svg path{
+  fill: #ffcc4e;
+}
+@media screen and (max-width: 539px){
+  h1{
+    font-size: 40px;
+  }
+  .cv-section-heading{
+    font-size: 28px;
+  }
+  .personal-info-attribute,
+  .personal-info-value,
+  .education-year,
+  .cv-common-text,
+  .education-name{
+    font-size: 15px;
+    line-height: 25px;
+  }
+  .education > div > div:not(:last-child){
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 767px){
+  .container{
+    width: 100%;
+    padding: 0 20px;
+  }
+  header{
+    padding: 30px 0;
+    grid-template-columns: 1fr;
+  }
+  header > div:first-child{
+    max-width: 170px;
+    margin: auto;
+  }
+}
+@media screen and (min-width: 768px){
+  .container{
+    max-width: 730px;
+  }
+}
+@media screen and (min-width: 992px){
+  .container{
+    max-width: 940px;
+  }
+}
+@media screen and (min-width: 1280px){
+  .container{
+    max-width: 1240px;
+  }
+}
