@@ -201,11 +201,8 @@ button {
   margin: 50px 0;
 }
 
-.preferences-images-container label div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10px;
+.preferences-images-container label {
+  text-align: center;
 }
 
 .preferences-types-container {
@@ -226,6 +223,7 @@ button {
   height: 180px;
   margin: auto;
   cursor: pointer;
+  margin-bottom: 10px;
   object-fit: contain;
 }
 
