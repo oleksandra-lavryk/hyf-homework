@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Yourcustomtailor - step 2</title>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <a href="index.html"><img src="images/logo.png" alt="logo icon"></a>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="step2.html">Step 2</a>
+          </li>
+          <li>
+            <a href="step3.html">Step 3</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <h1>Sign up to yourcustomtailor.com</h1>
+    <h2>Step 2/3 - how can we reach you?</h2>
+    <h4 class="progress-title">Progress:</h4>
+    <progress max="100" value="65"></progress>
+    <p>We will probably need to stay in touch somehow. Let us know how we can reach you?</p>
+
+    <form action="step3.html">
+      <div class="fields-wrapper">
+        <label>
+          <span>Email*</span>
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          <span>Phone</span>
+          <input type="tel" name="phone" pattern="[0-9]*">
+        </label>
+      </div>
+      <div class="fields-wrapper">
+        <label>
+          <span>Password*</span>
+          <input type="password" name="password" maxlength="10" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+            title="Please include at least 1 uppercase charactera and 1 lowercase character.">
+        </label>
+        <label>
+          <span>Re-enter Password*</span>
+          <input type="password" name="password-repeat" maxlength="10" required
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+            title="Please include at least 1 uppercase charactera and 1 lowercase character.">
+        </label>
+      </div>
+
+      <p>I want ti sign up for the newsletter</p>
+      <div class="newsletter-container">
+        <label>
+          <span>Weekly news</span>
+          <input type="radio" name="newsletter" value="weekly" checked>
+        </label>
+        <label>
+          <span>Monthly news</span>
+          <input type="radio" name="newsletter" value="monthly">
+        </label>
+        <label>
+          <span>Don't send me news</span>
+          <input type="radio" name="newsletter" value="no">
+        </label>
+      </div>
+
+      <button type="submit" name="button">Next step</button>
+    </form>
+
+  </main>
+
+</body>
+
+</html>
