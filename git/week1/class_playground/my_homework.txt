@@ -1,1 +1,2 @@
 Some new text in new file
+Some more text
