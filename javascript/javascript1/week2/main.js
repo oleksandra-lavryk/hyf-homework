@@ -62,3 +62,33 @@ function getClothToWear(temperature) {
 
 const clothesToWear = getClothToWear(20);
 console.log(clothesToWear);
+
+// Student manager
+const class07Students = [];
+function addStudentToClass(studentName) {
+  if (studentName == "") {
+    console.log("Cannot add without name.");
+  } else if (class07Students.includes(studentName)) {
+    console.log("Student " + studentName + " is already in the class.");
+  } else if (studentName == "Queen") {
+    class07Students.push(studentName);
+  } else if (class07Students.length > 6) {
+    console.log("Cannot add more students to class 07");
+  } else {
+    class07Students.push(studentName);
+  }
+}
+
+function getNumberOfStudents() {
+  return class07Students.length;
+}
+addStudentToClass("");
+addStudentToClass("Sasha");
+addStudentToClass("Pasha");
+addStudentToClass("Vera");
+addStudentToClass("Sara");
+addStudentToClass("Line");
+addStudentToClass("Ben");
+addStudentToClass("Pasha");
+addStudentToClass("Queen");
+console.log(getNumberOfStudents());
