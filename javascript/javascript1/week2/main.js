@@ -92,3 +92,49 @@ addStudentToClass("Ben");
 addStudentToClass("Pasha");
 addStudentToClass("Queen");
 console.log(getNumberOfStudents());
+
+// Candy helper
+const amountToSpend = parseInt(Math.random() * 100);
+let boughtCandyPrices = [];
+
+function canBuyMoreCandy() {
+  let totalprice = 0;
+  for (let i = 0; i < boughtCandyPrices.length; i++) {
+    totalprice += boughtCandyPrices[i];
+  }
+  if (totalprice < amountToSpend) {
+    return true;
+  } else {
+    return false;
+  }
+}
+function addCandy(candyType, weight) {
+  if (canBuyMoreCandy()) {
+    switch (candyType) {
+      case "sweet":
+        boughtCandyPrices.push(weight * 0.5);
+        break;
+      case "chocolate":
+        boughtCandyPrices.push(weight * 0.7);
+        break;
+      case "toffee":
+        boughtCandyPrices.push(weight * 1.1);
+        break;
+      case "chewing-gum":
+        boughtCandyPrices.push(weight * 0.03);
+        break;
+      default:
+        console.log("Unknown type of candy.");
+    }
+    if (canBuyMoreCandy()) {
+      console.log("You can buy more, so please do!");
+    }
+  } else {
+    console.log("No money.Enough candy for you!");
+  }
+}
+
+addCandy("sweet", 20);
+addCandy("toffee", 10);
+addCandy("chewing-gum", 50);
+console.log(boughtCandyPrices);
