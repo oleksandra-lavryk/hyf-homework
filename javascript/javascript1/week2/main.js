@@ -129,7 +129,10 @@ function addCandy(candyType, weight) {
         boughtCandyPrices.push(weight * 0.03);
         break;
       default:
-        console.log("Unknown type of candy.");
+        console.log(
+          "We dont have that, but try buying chocolate, sweet, toffee or chewing gum."
+        );
+        return;
     }
     if (canBuyMoreCandy()) {
       console.log("You can buy more, so please do!");
@@ -138,7 +141,7 @@ function addCandy(candyType, weight) {
     console.log("No money.Enough candy for you!");
   }
 }
-
+addCandy("", 20);
 addCandy("sweet", 20);
 addCandy("toffee", 10);
 addCandy("chewing-gum", 50);
