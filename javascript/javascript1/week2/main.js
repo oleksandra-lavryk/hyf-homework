@@ -1,6 +1,10 @@
 // Flight booking fullname function
 
 function getFullname(firstname, surname, useFormalName, gender) {
+  if (firstname == "" || surname == "") {
+    console.log("Please give firstname and surname!");
+    return;
+  }
   if (useFormalName) {
     switch (gender) {
       case "male":
@@ -18,8 +22,9 @@ function getFullname(firstname, surname, useFormalName, gender) {
 
 const fullname1 = getFullname("Benjamin", "Hughes", true, "male");
 const fullname2 = getFullname("Line", "Hansen", true, "female");
+const fullname3 = getFullname("", "");
 
-console.log(fullname1 + "\n" + fullname2);
+console.log(fullname1 + "\n" + fullname2 + "\n" + fullname3);
 
 // Event application
 const weekDays = [
