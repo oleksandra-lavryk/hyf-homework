@@ -87,3 +87,52 @@ function logOutSeriesText() {
 }
 logOutSeriesText();
 console.log("In total that is " + totalPersent + "% of my life");
+
+// Smart-ease - Back to the basics!
+let notes = [];
+function saveNote(content, id) {
+  notes.push({ content: content, id: id });
+}
+saveNote("Pick up groceries", 1);
+saveNote("Do laundry", 2);
+console.log(notes);
+
+function getNote(id) {
+  for (let i = 0; i < notes.length; i++) {
+    if (notes[i].id === id) {
+      return notes[i];
+    }
+    return false;
+  }
+}
+
+const firstNote = getNote(3);
+console.log(firstNote); // {content: 'Pick up groceries', id: 1}
+
+function logOutNotesFormatted() {
+  for (let i = 0; i < notes.length; i++) {
+    console.log(
+      "The note with id: " +
+        notes[i].id +
+        ", has the following note text: " +
+        notes[i].content
+    );
+  }
+}
+
+logOutNotesFormatted(); // should log out the text below
+
+// The note with id: 1, has the following note text: Pick up groceries
+// The note with id: 2, has the following note text: Do laundry
+
+function checkIfEmptyNote(note) {
+  if (note.content === "") {
+    return true;
+  }
+  return false;
+}
+if (checkIfEmptyNote(notes[1])) {
+  console.log("Note is empty");
+} else {
+  console.log("Note is not empty");
+}
