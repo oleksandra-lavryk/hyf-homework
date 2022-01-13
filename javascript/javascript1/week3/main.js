@@ -136,3 +136,36 @@ if (checkIfEmptyNote(notes[1])) {
 } else {
   console.log("Note is not empty");
 }
+
+// CactusIO-interactive
+let activities = [];
+
+function addActivity(date, activity, duration) {
+  activities.push({ date: date, activity: activity, duration: duration });
+}
+addActivity("23/7-18", "Youtube", 30);
+addActivity("25/7-18", "Youtube", 120);
+console.log(activities);
+const usageLimit = 150;
+function showStatus() {
+  if (activities.length === 0) {
+    return "Add some activities before calling showStatus";
+  } else {
+    let activitiesAmount = 0;
+    for (let i = 0; i < activities.length; i++) {
+      activitiesAmount += activities[i].duration;
+    }
+    if (activitiesAmount >= usageLimit) {
+      return "You have reached your limit, no more smartphoning for you!";
+    } else {
+      return (
+        "You have added " +
+        activities.length +
+        " activities. They amount to " +
+        activitiesAmount +
+        " min. of usage."
+      );
+    }
+  }
+}
+console.log(showStatus());
