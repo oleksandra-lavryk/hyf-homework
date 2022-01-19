@@ -98,15 +98,20 @@ saveNote("Do laundry", 2);
 console.log(notes);
 
 function getNote(id) {
+  let checkFoundedNote = -1;
   for (let i = 0; i < notes.length; i++) {
-    if (notes[i].id === id) {
-      return notes[i];
+    if (notes[i].id == id) {
+      checkFoundedNote = i;
     }
+  }
+  if (checkFoundedNote == -1) {
     return false;
+  } else {
+    return notes[checkFoundedNote];
   }
 }
 
-const firstNote = getNote(3);
+const firstNote = getNote(2);
 console.log(firstNote); // {content: 'Pick up groceries', id: 1}
 
 function logOutNotesFormatted() {
