@@ -25,9 +25,11 @@ const months = [
 ];
 
 const setTimerStr = "Set a timer for ";
-
+const mathStr = "What is ";
+let firstDigit;
+let secondDigit;
 function getReply(command) {
-  if (command.indexOf(checkNameStr) !== -1) {
+  if (command.indexOf(checkNameStr) >= 0) {
     if (userName.length == 0) {
       userName = command.slice(checkNameStr.length + 1, command.length);
       console.log("Nice to meet you, " + userName + ".");
@@ -36,7 +38,7 @@ function getReply(command) {
     }
   }
 
-  if (command.indexOf(sayNameStr) !== -1) {
+  if (command.indexOf(sayNameStr) >= 0) {
     if (userName.length == 0) {
       console.log("I am sorry, I don`t know your name.");
     } else {
@@ -45,8 +47,8 @@ function getReply(command) {
   }
 
   if (
-    command.indexOf(toDoListAddStr) !== -1 &&
-    command.indexOf(checkAddStr) !== -1
+    command.indexOf(toDoListAddStr) >= 0 &&
+    command.indexOf(checkAddStr) >= 0
   ) {
     let todoItem = command;
     todoItem = todoItem
@@ -56,8 +58,8 @@ function getReply(command) {
   }
 
   if (
-    command.indexOf(toDoListRemoveStr) !== -1 &&
-    command.indexOf(checkRemoveStr) !== -1
+    command.indexOf(toDoListRemoveStr) >= 0 &&
+    command.indexOf(checkRemoveStr) >= 0
   ) {
     let todoItem = command;
     todoItem = todoItem
@@ -71,7 +73,7 @@ function getReply(command) {
     }
   }
 
-  if (command.indexOf(printToDoStr) !== -1) {
+  if (command.indexOf(printToDoStr) >= 0) {
     let printedToDoList = "ToDo list: ";
     for (let item of toDoList) {
       printedToDoList = printedToDoList + item + " / ";
@@ -79,7 +81,7 @@ function getReply(command) {
     console.log(printedToDoList);
   }
 
-  if (command.indexOf(checkDayStr) !== -1) {
+  if (command.indexOf(checkDayStr) >= 0) {
     let todayIsDate = new Date();
     console.log(
       todayIsDate.getDate() +
@@ -89,7 +91,7 @@ function getReply(command) {
         todayIsDate.getFullYear()
     );
   }
-  if (command.indexOf(setTimerStr) !== -1) {
+  if (command.indexOf(setTimerStr) >= 0) {
     let minutes = command;
     minutes = parseInt(
       minutes.replaceAll(setTimerStr, "").replaceAll(" minutes", "")
@@ -100,12 +102,37 @@ function getReply(command) {
     setTimeout(timerFinished, minutes * 60 * 1000);
     console.log("Timer set for " + minutes + " minutes");
   }
+
+  if (
+    command.indexOf("+") >= 0 ||
+    command.indexOf("-") >= 0 ||
+    command.indexOf("*") >= 0 ||
+    command.indexOf("/") >= 0
+  ) {
+    firstDigit = command.replaceAll(mathStr, "");
+    firstDigit = parseInt(firstDigit.slice(0, firstDigit.indexOf(" ")));
+    secondDigit = parseInt(
+      command.slice(command.lastIndexOf(" ") + 1, command.length - 1)
+    );
+  }
+  if (command.indexOf("+") >= 0) {
+    console.log("Result is: " + (firstDigit + secondDigit));
+  }
+  if (command.indexOf("-") >= 0) {
+    console.log("Result is: " + (firstDigit - secondDigit));
+  }
+  if (command.indexOf("*") >= 0) {
+    console.log("Result is: " + firstDigit * secondDigit);
+  }
+  if (command.indexOf("/") >= 0) {
+    console.log("Result is: " + firstDigit / secondDigit);
+  }
 }
 
-// getReply("Hello my name is Thomas");
-// getReply("Hello my name is Thomas");
+getReply("Hello my name is Thomas");
+getReply("Hello my name is Thomas");
 
-// getReply("What is my name");
+getReply("What is my name");
 
 getReply("Add fishing to my todo list");
 getReply("Add reading to my todo list");
@@ -113,4 +140,8 @@ getReply("Add singing in the shower to my todo list");
 getReply("Remove reading from my todo list");
 getReply("What is on my todo?");
 getReply("What day is it today?");
+getReply("What is 12 + 52?");
+getReply("What is 12 - 2?");
+getReply("What is 12 * 10?");
+getReply("What is 12 / 2?");
 getReply("Set a timer for 1 minute(s)");
