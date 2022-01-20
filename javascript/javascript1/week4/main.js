@@ -1,30 +1,32 @@
 let userName = "";
 let toDoList = new Set();
 
-function getReply(command) {
-  const checkNameStr = "Hello my name is";
-  const sayNameStr = "What is my name";
-  const toDoListAddStr = " to my todo list";
-  const toDoListRemoveStr = " from my todo list";
-  const checkAddStr = "Add ";
-  const checkRemoveStr = "Remove ";
-  const printToDoStr = "What is on my todo?";
-  const checkDayStr = "What day is it today?";
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+const checkNameStr = "Hello my name is";
+const sayNameStr = "What is my name";
+const toDoListAddStr = " to my todo list";
+const toDoListRemoveStr = " from my todo list";
+const checkAddStr = "Add ";
+const checkRemoveStr = "Remove ";
+const printToDoStr = "What is on my todo?";
+const checkDayStr = "What day is it today?";
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
+const setTimerStr = "Set a timer for ";
+
+function getReply(command) {
   if (command.indexOf(checkNameStr) !== -1) {
     if (userName.length == 0) {
       userName = command.slice(checkNameStr.length + 1, command.length);
@@ -87,6 +89,17 @@ function getReply(command) {
         todayIsDate.getFullYear()
     );
   }
+  if (command.indexOf(setTimerStr) !== -1) {
+    let minutes = command;
+    minutes = parseInt(
+      minutes.replaceAll(setTimerStr, "").replaceAll(" minutes", "")
+    );
+    function timerFinished() {
+      console.log("Timer done");
+    }
+    setTimeout(timerFinished, minutes * 60 * 1000);
+    console.log("Timer set for " + minutes + " minutes");
+  }
 }
 
 // getReply("Hello my name is Thomas");
@@ -100,3 +113,4 @@ getReply("Add singing in the shower to my todo list");
 getReply("Remove reading from my todo list");
 getReply("What is on my todo?");
 getReply("What day is it today?");
+getReply("Set a timer for 1 minute(s)");
