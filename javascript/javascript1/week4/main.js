@@ -9,6 +9,21 @@ function getReply(command) {
   const checkAddStr = "Add ";
   const checkRemoveStr = "Remove ";
   const printToDoStr = "What is on my todo?";
+  const checkDayStr = "What day is it today?";
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   if (command.indexOf(checkNameStr) !== -1) {
     if (userName.length == 0) {
@@ -61,6 +76,17 @@ function getReply(command) {
     }
     console.log(printedToDoList);
   }
+
+  if (command.indexOf(checkDayStr) !== -1) {
+    let todayIsDate = new Date();
+    console.log(
+      todayIsDate.getDate() +
+        ". of " +
+        months[todayIsDate.getMonth()] +
+        " " +
+        todayIsDate.getFullYear()
+    );
+  }
 }
 
 // getReply("Hello my name is Thomas");
@@ -73,3 +99,4 @@ getReply("Add reading to my todo list");
 getReply("Add singing in the shower to my todo list");
 getReply("Remove reading from my todo list");
 getReply("What is on my todo?");
+getReply("What day is it today?");
