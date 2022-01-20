@@ -1,5 +1,6 @@
+let commnadCounter = 0;
 let userName = "";
-let toDoList = new Set();
+let toDoList = [];
 
 const checkNameStr = "Hello my name is";
 const sayNameStr = "What is my name";
@@ -28,7 +29,11 @@ const setTimerStr = "Set a timer for ";
 const mathStr = "What is ";
 let firstDigit;
 let secondDigit;
+let checkCounter = "How many commands have I written?";
+
 function getReply(command) {
+  commnadCounter = commnadCounter + 1;
+
   if (command.indexOf(checkNameStr) >= 0) {
     if (userName.length == 0) {
       userName = command.slice(checkNameStr.length + 1, command.length);
@@ -50,23 +55,27 @@ function getReply(command) {
     command.indexOf(toDoListAddStr) >= 0 &&
     command.indexOf(checkAddStr) >= 0
   ) {
-    let todoItem = command;
-    todoItem = todoItem
+    let todoItem = command
       .replaceAll(checkAddStr, "")
       .replaceAll(toDoListAddStr, "");
-    toDoList.add(todoItem);
+    if (toDoList.includes(todoItem)) {
+      console.log(todoItem + " is already in todo list.");
+    } else {
+      toDoList.push(todoItem);
+      console.log(todoItem + " added to your todo list.");
+    }
   }
 
   if (
     command.indexOf(toDoListRemoveStr) >= 0 &&
     command.indexOf(checkRemoveStr) >= 0
   ) {
-    let todoItem = command;
-    todoItem = todoItem
+    let todoItem = command
       .replaceAll(checkRemoveStr, "")
       .replaceAll(toDoListRemoveStr, "");
 
-    if (toDoList.delete(todoItem)) {
+    if (toDoList.indexOf(todoItem) >= 0) {
+      toDoList.splice(toDoList.indexOf(todoItem), 1);
       console.log(todoItem + " removed from todo list.");
     } else {
       console.log("This item was not founded in todo list.");
@@ -92,15 +101,14 @@ function getReply(command) {
     );
   }
   if (command.indexOf(setTimerStr) >= 0) {
-    let minutes = command;
-    minutes = parseInt(
-      minutes.replaceAll(setTimerStr, "").replaceAll(" minutes", "")
+    let minutes = parseInt(
+      command.replaceAll(setTimerStr, "").replaceAll(" minutes", "")
     );
     function timerFinished() {
       console.log("Timer done");
     }
     setTimeout(timerFinished, minutes * 60 * 1000);
-    console.log("Timer set for " + minutes + " minutes");
+    console.log("Timer set for " + minutes + " minute(s)");
   }
 
   if (
@@ -127,6 +135,9 @@ function getReply(command) {
   if (command.indexOf("/") >= 0) {
     console.log("Result is: " + firstDigit / secondDigit);
   }
+  if (command.indexOf(checkCounter) >= 0) {
+    console.log("You wrote: " + commnadCounter + " commands.");
+  }
 }
 
 getReply("Hello my name is Thomas");
@@ -134,6 +145,7 @@ getReply("Hello my name is Thomas");
 
 getReply("What is my name");
 
+getReply("Add fishing to my todo list");
 getReply("Add fishing to my todo list");
 getReply("Add reading to my todo list");
 getReply("Add singing in the shower to my todo list");
@@ -144,4 +156,5 @@ getReply("What is 12 + 52?");
 getReply("What is 12 - 2?");
 getReply("What is 12 * 10?");
 getReply("What is 12 / 2?");
-getReply("Set a timer for 1 minute(s)");
+getReply("Set a timer for 1 minutes");
+getReply("How many commands have I written?");
