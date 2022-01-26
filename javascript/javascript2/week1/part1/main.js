@@ -20,12 +20,13 @@ const danishLetters = ["å", "æ", "ø"];
 function findDanishLetters(danishString) {
   let result = { total: 0 };
   for (let i = 0; i < danishString.length; i++) {
-    if (danishLetters.includes(danishString[i])) {
+    if (danishLetters.includes(danishString[i].toLowerCase())) {
       result.total++;
-      if (result.hasOwnProperty(danishString[i])) {
-        result[danishString[i]] = result[danishString[i]] + 1;
+      if (result.hasOwnProperty(danishString[i].toLowerCase())) {
+        result[danishString[i].toLowerCase()] =
+          result[danishString[i].toLowerCase()] + 1;
       } else {
-        result[danishString[i]] = 1;
+        result[danishString[i].toLowerCase()] = 1;
       }
     }
   }
@@ -35,7 +36,7 @@ function findDanishLetters(danishString) {
 const danishString = "Jeg har en blå bil";
 findDanishLetters(danishString); // returns {total: 1, å: 1}
 
-const danishString2 = "Blå grød med røde bær";
+const danishString2 = "Blå grØd med røde bær";
 findDanishLetters(danishString2); // returns {total: 4, æ: 1, ø: 2, å: 1}
 
 const spiritAnimalsList = [
