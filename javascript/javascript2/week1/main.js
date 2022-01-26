@@ -14,3 +14,26 @@ function getShortestWord(wordsArr) {
   return shortWord;
 }
 console.log(getShortestWord(danishWords)); // returns 'ø'
+
+const danishLetters = ["å", "æ", "ø"];
+
+function findDanishLetters(danishString) {
+  let result = { total: 0 };
+  for (let i = 0; i < danishString.length; i++) {
+    if (danishLetters.includes(danishString[i])) {
+      result.total++;
+      if (result.hasOwnProperty(danishString[i])) {
+        result[danishString[i]] = result[danishString[i]] + 1;
+      } else {
+        result[danishString[i]] = 1;
+      }
+    }
+  }
+  console.log(result);
+}
+
+const danishString = "Jeg har en blå bil";
+findDanishLetters(danishString); // returns {total: 1, å: 1}
+
+const danishString2 = "Blå grød med røde bær";
+findDanishLetters(danishString2); // returns {total: 4, æ: 1, ø: 2, å: 1}
