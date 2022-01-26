@@ -37,3 +37,49 @@ findDanishLetters(danishString); // returns {total: 1, å: 1}
 
 const danishString2 = "Blå grød med røde bær";
 findDanishLetters(danishString2); // returns {total: 4, æ: 1, ø: 2, å: 1}
+
+const spiritAnimalsList = [
+  "Butterfly",
+  "Owl",
+  "Spider",
+  "Crow",
+  "Hummingbird",
+  "Hawk",
+  "Grasshopper",
+  "Eagle",
+  "Bat",
+  "Dolphin",
+];
+
+const generateButton = document.querySelector("button");
+const nameInput = document.querySelector("input");
+const generateSelect = document.getElementById("generate-settings");
+
+const namePTag = document.querySelector(".spirit-animal-name");
+
+function printSpiritName() {
+  const randomSpiritName =
+    spiritAnimalsList[Math.floor(Math.random() * spiritAnimalsList.length)];
+  if (nameInput.value.length > 0) {
+    namePTag.innerText = nameInput.value + " - " + randomSpiritName;
+  } else {
+    namePTag.innerText = "Enter name please!";
+  }
+}
+generateButton.onclick = function (event) {
+  if (generateSelect.value == "click") {
+    printSpiritName();
+  }
+};
+
+nameInput.onchange = function (event) {
+  if (generateSelect.value == "change") {
+    printSpiritName();
+  }
+};
+
+nameInput.onmouseover = function (event) {
+  if (generateSelect.value == "hover") {
+    printSpiritName();
+  }
+};
