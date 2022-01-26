@@ -3,7 +3,9 @@ console.log("Script loaded");
 const products = getAvailableProducts();
 console.log(products);
 
-const priductUl = document.querySelector(".products-list");
+const priductUl = document.createElement("ul");
+priductUl.classList.add("products-list");
+document.querySelector("main").appendChild(priductUl);
 
 function renderProducts(products) {
   for (let i = 0; i < products.length; i++) {
