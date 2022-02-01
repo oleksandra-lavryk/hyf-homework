@@ -6,12 +6,19 @@ const newNumbers = numbers
   .map((filteredNumber) => filteredNumber * 2);
 console.log(newNumbers);
 
-// Working with movies
+// Create an array  containing the movies with a short title
+
 const shortMoviesTitle = movies.filter((movie) => !movie.title.includes(" "));
 console.log(shortMoviesTitle);
 
-const longMoviesTitle = movies.filter((movie) => movie.title.includes(" "));
-console.log(longMoviesTitle);
+// Create an array of movie titles with long movie titles
+
+const longMoviesTitles = movies
+  .filter((movie) => movie.title.includes(" "))
+  .map((filteredMovie) => filteredMovie.title);
+console.log(longMoviesTitles);
+
+// Count the number of movies made between 1980-1989 (including both the years)
 
 const numberOfMoviesMadeBetweenYears = movies.reduce((movieCounter, movie) => {
   if (movie.year >= 1980 && movie.year <= 1989) {
@@ -21,6 +28,8 @@ const numberOfMoviesMadeBetweenYears = movies.reduce((movieCounter, movie) => {
 }, 0);
 
 console.log(numberOfMoviesMadeBetweenYears);
+
+// Create a new array that has an extra key called tag. The tag is based on the rating: Good (>= 7), Average (>= 4 and < 7), Bad (< 4)
 
 const tagedMovies = movies.map((movie) => {
   if (movie.rating >= 7) {
@@ -36,13 +45,17 @@ const tagedMovies = movies.map((movie) => {
 });
 console.log(tagedMovies);
 
-// 6. Now map the movies array to only the rating of the movies???
+// Using chaining, first filter the movies array to only contain the movies rated higher than 6.
+// Now map the movies array to only the rating of the movies.
+
 const ratedMovies = movies
   .filter((movie) => movie.rating > 6)
   .map((filteredMovie) => {
     return filteredMovie.rating;
   });
 console.log(ratedMovies);
+
+// Count the total number of movies containing any of following keywords: Surfer, Alien or Benjamin.
 
 const numberMoviesContainsWords = movies.reduce((movieCounter, movie) => {
   if (
@@ -59,41 +72,58 @@ console.log(numberMoviesContainsWords);
 
 // Create an array of movies where a word in the title is duplicated.
 // Fx "Star Wars: The Clone Wars" the word Wars is duplicated.
-// Here are some madeup examples of movies with duplicated words in the title: "The three men and the pistol",
-// "Chase three - The final chase"
 
-const str = "Big black bug bit a big black dog on his big black nose";
-const strArr = str.toLowerCase().split(" ");
-console.log(strArr);
+const moviesDuplicatedWords = movies.filter((movie) => {
+  const titleArr = movie.title.toLowerCase().split(" ");
+  let seenElements = [];
+  let checkDuplicate;
+  titleArr.forEach((element) => {
+    if (seenElements.includes(element)) {
+      checkDuplicate = true;
+    } else {
+      seenElements.push(element);
+      checkDuplicate = false;
+    }
+  });
+  return checkDuplicate;
+});
 
-// const sumRating = movies.reduce((ratingSum, movie) => {
-//   return (ratingSum += movie.rating);
-// }, 0);
-// let averageRating = sumRating / movies.length;
-// averageRating = Math.floor(averageRating * 10) / 10;
-// console.log(averageRating);
+console.log(moviesDuplicatedWords);
 
-// const countByRatingTag = tagedMovies.reduce(
-//   (countingObj, movie) => {
-//     switch (movie.tag.toLowerCase()) {
-//       case "good":
-//         countingObj.goodMovies += 1;
-//         break;
-//       case "average":
-//         countingObj.averageMovies += 1;
-//         break;
-//       case "bad":
-//         countingObj.badMovies += 1;
-//         break;
-//       default:
-//         return countingObj;
-//     }
-//     return countingObj;
-//   },
-//   {
-//     goodMovies: 0,
-//     averageMovies: 0,
-//     badMovies: 0,
-//   }
-// );
-// console.log(countByRatingTag);
+// Calculate the average rating of all the movies using reduce.
+
+const sumRating = movies.reduce((ratingSum, movie) => {
+  return (ratingSum += movie.rating);
+}, 0);
+
+let averageRating = sumRating / movies.length;
+averageRating = Math.floor(averageRating * 10) / 10;
+console.log(averageRating);
+
+// Count the total number of Good, Average and Bad movies using reduce.
+// A return could fx be {goodMovies: 33, averageMovies: 45, goodMovies: 123}
+
+const countByRatingTag = tagedMovies.reduce(
+  (countingObj, movie) => {
+    switch (movie.tag.toLowerCase()) {
+      case "good":
+        countingObj.goodMovies += 1;
+        break;
+      case "average":
+        countingObj.averageMovies += 1;
+        break;
+      case "bad":
+        countingObj.badMovies += 1;
+        break;
+      default:
+        return countingObj;
+    }
+    return countingObj;
+  },
+  {
+    goodMovies: 0,
+    averageMovies: 0,
+    badMovies: 0,
+  }
+);
+console.log(countByRatingTag);
