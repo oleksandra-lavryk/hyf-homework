@@ -1,25 +1,51 @@
-console.log("Script loaded");
+const allProducts = getAvailableProducts();
+console.log(allProducts);
+const productUl = document.querySelector(".products-list");
 
-const products = getAvailableProducts();
-console.log(products);
-
-const productUl = document.createElement("ul");
-productUl.classList.add("products-list");
-document.querySelector("main").appendChild(productUl);
-
-function renderProducts(products) {
-  for (let i = 0; i < products.length; i++) {
-    let productLi = document.createElement("li");
-    productLi.innerHTML =
-      "<h2>" +
-      products[i].name +
-      "</h2><span> price: " +
-      products[i].price +
-      "</span><span> rating: " +
-      products[i].rating +
-      "</span>";
-
-    productUl.appendChild(productLi);
-  }
+function filterProductByName(productName) {
+  return allProducts.filter((item) =>
+    item.name.toLowerCase().includes(productName.toLowerCase())
+  );
 }
-renderProducts(products);
+
+function filterProductByPrice(inputPrice) {
+  return allProducts.filter((item) => item.price <= inputPrice);
+}
+
+function renderProducts(filteredProducts) {
+  productUl.innerHTML = "";
+  filteredProducts.forEach((element) => {
+    let productLi = document.createElement("li");
+    productLi.innerHTML = `
+      <h2>${element.name}</h2>
+      <span>${element.price}</span>
+      <span>${element.rating}</span>
+    `;
+    productUl.appendChild(productLi);
+  });
+}
+
+const inputFilterName = document.querySelector(".input-name-filtering");
+const inputFilterPrice = document.querySelector(".input-price-filtering");
+
+inputFilterName.addEventListener("input", function (e) {
+  const inputValue = e.target.value;
+  if (inputValue === "") {
+    renderProducts(allProducts);
+  } else {
+    const filteredProducts = filterProductByName(inputValue);
+    renderProducts(filteredProducts);
+  }
+});
+
+inputFilterPrice.addEventListener("input", function (e) {
+  const inputValue = e.target.value;
+  if (inputValue === "") {
+    renderProducts(allProducts);
+  } else {
+    const filteredProducts = filterProductByPrice(parseInt(inputValue));
+    renderProducts(filteredProducts);
+  }
+});
+
+renderProducts(allProducts);
