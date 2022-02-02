@@ -1,34 +1,63 @@
 const allProducts = getAvailableProducts();
-console.log(allProducts);
+
 const productUl = document.querySelector(".products-list");
+const sortCheckBox = document.getElementById("sort-products");
 
 function filterProductByName(productName) {
   return allProducts.filter((item) =>
     item.name.toLowerCase().includes(productName.toLowerCase())
   );
 }
-
 function filterProductByPrice(inputPrice) {
   return allProducts.filter((item) => item.price <= inputPrice);
 }
 
+function sortProductListByRating(products) {
+  function sortArray(item1, item2) {
+    if (item1.rating < item2.rating) {
+      return -1;
+    }
+    if (item1.rating > item2.rating) {
+      return 1;
+    }
+    return 0;
+  }
+  return products.sort(sortArray);
+}
+function renderProduct(product) {
+  let productLi = document.createElement("li");
+  productLi.classList.add("products-list-item");
+  productLi.innerHTML = `
+      <h2>${product.name}</h2>
+      <div>
+        <span>Price: </span>
+        <span>${product.price}</span>
+      </div>
+      <div>
+        <span>Rating: </span>
+        <span> ${product.rating}</span>
+      </div>
+      
+    `;
+  productUl.appendChild(productLi);
+}
+
 function renderProducts(filteredProducts) {
   productUl.innerHTML = "";
-  filteredProducts.forEach((element) => {
-    let productLi = document.createElement("li");
-    productLi.innerHTML = `
-      <h2>${element.name}</h2>
-      <span>${element.price}</span>
-      <span>${element.rating}</span>
-    `;
-    productUl.appendChild(productLi);
-  });
+  if (sortCheckBox.checked) {
+    sortProductListByRating(filteredProducts).forEach((element) =>
+      renderProduct(element)
+    );
+  } else {
+    filteredProducts.forEach((element) => renderProduct(element));
+  }
 }
 
 const inputFilterName = document.querySelector(".input-name-filtering");
 const inputFilterPrice = document.querySelector(".input-price-filtering");
 
 inputFilterName.addEventListener("input", function (e) {
+  inputFilterPrice.value = "";
   const inputValue = e.target.value;
   if (inputValue === "") {
     renderProducts(allProducts);
@@ -39,8 +68,9 @@ inputFilterName.addEventListener("input", function (e) {
 });
 
 inputFilterPrice.addEventListener("input", function (e) {
+  inputFilterName.value = "";
   const inputValue = e.target.value;
-  if (inputValue === "") {
+  if (inputValue === "" || isNaN(e.target.value)) {
     renderProducts(allProducts);
   } else {
     const filteredProducts = filterProductByPrice(parseInt(inputValue));

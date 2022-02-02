@@ -9,8 +9,23 @@
 </head>
 <body>
   <main>
-    <input class="input-name-filtering" type="text" />
-    <input class="input-price-filtering" type="text" />
+    <div class="product-conatiner-header">
+      <div class="sort-products-wrapper">
+        <input type="checkbox" name="sort-products" id="sort-products" />
+        <label for="sort-products">Sort products by rating</label>
+      </div>
+      <input
+        class="input-name-filtering"
+        type="text"
+        placeholder="Enter name"
+      />
+      <input
+        class="input-price-filtering"
+        type="text"
+        placeholder="Enter max price"
+      />
+    </div>
+
     <ul class="products-list"></ul>
   </main>
   <script src="hyfBayHelpers.js"></script>
