@@ -78,4 +78,22 @@ inputFilterPrice.addEventListener("input", function (e) {
   }
 });
 
+const changeColorBtn = document.querySelector(".change-color-button");
+
+changeColorBtn.addEventListener("click", function (e) {
+  const productItemList = document.querySelectorAll(".products-list-item");
+  if (
+    productItemList.length > 0 &&
+    productItemList[0].classList.contains("products-list-item--colored")
+  ) {
+    productItemList.forEach((element) =>
+      element.classList.remove("products-list-item--colored")
+    );
+  } else {
+    productItemList.forEach((element) =>
+      element.classList.add("products-list-item--colored")
+    );
+  }
+});
+
 renderProducts(allProducts);
