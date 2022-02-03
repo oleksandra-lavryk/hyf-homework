@@ -3,6 +3,11 @@ const allProducts = getAvailableProducts();
 const productUl = document.querySelector(".products-list");
 const sortCheckBox = document.getElementById("sort-products");
 
+const inputFilterName = document.querySelector(".input-name-filtering");
+const inputFilterPrice = document.querySelector(".input-price-filtering");
+
+const changeColorBtn = document.querySelector(".change-color-button");
+
 function filterProductByName(productName) {
   return allProducts.filter((item) =>
     item.name.toLowerCase().includes(productName.toLowerCase())
@@ -53,9 +58,6 @@ function renderProducts(filteredProducts) {
   }
 }
 
-const inputFilterName = document.querySelector(".input-name-filtering");
-const inputFilterPrice = document.querySelector(".input-price-filtering");
-
 inputFilterName.addEventListener("input", function (e) {
   inputFilterPrice.value = "";
   const inputValue = e.target.value;
@@ -77,8 +79,6 @@ inputFilterPrice.addEventListener("input", function (e) {
     renderProducts(filteredProducts);
   }
 });
-
-const changeColorBtn = document.querySelector(".change-color-button");
 
 changeColorBtn.addEventListener("click", function (e) {
   const productItemList = document.querySelectorAll(".products-list-item");
