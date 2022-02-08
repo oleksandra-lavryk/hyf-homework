@@ -111,3 +111,22 @@ const functionArray = [
 ];
 
 functionArray.forEach((funct) => funct());
+
+// Create a function as a const and try creating a function normally. Call both functions.
+
+console.log(foo()); //in this case I will not get an error and I will get 6 in console because browser loads function declarations before any code is executed.
+function foo() {
+  return 6;
+}
+
+const fooTwo = () => 5;
+console.log(fooTwo()); // here I can not call fooTwo before declaration
+
+// Create an object that has a key whose value is a function. Try calling this function.
+
+const objWithFunction = {
+  executeSomth: (str) => console.log(str),
+};
+objWithFunction.executeSomth(
+  "Printed some text with object key value function"
+);
