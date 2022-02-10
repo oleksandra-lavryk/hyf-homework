@@ -6,6 +6,9 @@ const sSpan = document.getElementById("s-amount");
 const jSpan = document.getElementById("j-amount");
 const sBlock = document.getElementById("s-block");
 const jBlock = document.getElementById("j-block");
+const gameMessage = document.querySelector(".game-message");
+const gameTimer = document.getElementById("game-timer");
+
 let sCounter = 0;
 let jCounter = 0;
 
@@ -19,9 +22,21 @@ function countKeyDown(key) {
     jSpan.innerText = jCounter;
   }
 }
+function setCountDown(time) {
+  gameTimer.innerText = time;
+  let timeleft = time - 1;
+  const downloadTimer = setInterval(function () {
+    if (timeleft <= 0) {
+      clearInterval(downloadTimer);
+    }
+    gameTimer.innerText = timeleft;
+    timeleft -= 1;
+  }, 1000);
+}
 startBtn.addEventListener("click", () => {
   gameDuration = parseInt(inputDuration.value);
   if (!isNaN(gameDuration)) {
+    setCountDown(gameDuration);
     startBtn.disabled = true;
     setTimeout(() => {
       window.removeEventListener("keydown", countKeyDown);
@@ -50,15 +65,17 @@ resetBtn.addEventListener("click", () => {
   }
   sCounter = 0;
   jCounter = 0;
-  document.querySelector(".game-message").innerText = "";
+  gameMessage.innerText = "";
   sSpan.innerText = "";
   jSpan.innerText = "";
   inputDuration.value = "";
+  gameTimer.innerText = "--";
   sBlock.className = "";
   jBlock.className = "";
 });
+
 function gameDraw(message) {
-  document.querySelector(".game-message").innerText = "Game result: " + message;
+  gameMessage.innerText = "Game result: " + message;
   sBlock.classList.add("draw");
   jBlock.classList.add("draw");
 }

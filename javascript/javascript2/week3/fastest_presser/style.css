@@ -100,3 +100,15 @@ input:focus {
   top: 0;
   left: 0;
 }
+
+#game-timer {
+  margin: 15px 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #16e1cf;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
