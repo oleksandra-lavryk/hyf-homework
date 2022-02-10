@@ -112,3 +112,21 @@ input:focus {
   align-items: center;
   justify-content: center;
 }
+
+.fastest-presser-results>div>p {
+  animation: moveUpDown 1s infinite;
+}
+
+@keyframes moveUpDown {
+  from {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(-15deg);
+  }
+
+  to {
+    transform: rotate(0);
+  }
+}
