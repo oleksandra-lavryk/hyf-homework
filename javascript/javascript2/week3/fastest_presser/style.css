@@ -1,0 +1,132 @@
+body {
+  font-family: sans-serif;
+}
+
+.fastest-presser-results,
+.fastest-presser-head {
+  max-width: 80%;
+  margin: auto;
+}
+
+.fastest-presser-head {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  background-color: #16e1cf;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 10px 0;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 120px;
+}
+
+button:hover {
+  background-color: rgb(22 223 206 / 60%);
+}
+
+.reset-game {
+  background-color: #eeeeee;
+}
+
+.reset-game:hover {
+  background-color: #e0e0e0;
+}
+
+h1 {
+  text-align: center;
+}
+
+input {
+  width: 300px;
+  max-width: 95%;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(22 225 207 / 20%);
+  padding: 8px;
+}
+
+button:focus,
+input:focus {
+  outline: none;
+}
+
+input:focus {
+  background-color: rgb(22 225 207 / 40%);
+}
+
+.fastest-presser-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.fastest-presser-results>div {
+  position: relative;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 1px solid #000000;
+}
+
+.fastest-presser-results>div:first-child {
+  border-right: 1px solid #000000;
+}
+
+.game-message {
+  color: #076960;
+  font-weight: 700;
+}
+
+.winner {
+  background-color: #d0f9f5;
+}
+
+.draw {
+  background-color: #f6ebb7;
+}
+
+#winner-canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#game-timer {
+  margin: 15px 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #16e1cf;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fastest-presser-results>div>p {
+  animation: moveUpDown 1s infinite;
+}
+
+@keyframes moveUpDown {
+  from {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(-15deg);
+  }
+
+  to {
+    transform: rotate(0);
+  }
+}
