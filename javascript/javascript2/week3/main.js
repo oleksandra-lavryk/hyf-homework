@@ -43,10 +43,7 @@ function logLocation() {
   navigator.geolocation.getCurrentPosition(
     (currentPosition) => {
       console.log(
-        "latitude: " +
-          currentPosition.coords.latitude +
-          " longitude: " +
-          currentPosition.coords.longitude
+        `latitude: ${currentPosition.coords.latitude} longitude: ${currentPosition.coords.longitude}`
       );
       currentLatitude = currentPosition.coords.latitude;
       currentLongitude = currentPosition.coords.longitude;

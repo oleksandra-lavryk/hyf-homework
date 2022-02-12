@@ -39,7 +39,7 @@ startBtn.addEventListener("click", () => {
     setCountDown(gameDuration);
     startBtn.disabled = true;
     setTimeout(() => {
-      window.removeEventListener("keydown", countKeyDown);
+      window.removeEventListener("keyup", countKeyDown);
       if (sCounter === 0 && jCounter === 0) {
         gameDraw("keydowns not detected!");
       } else if (sCounter > jCounter) {
@@ -52,7 +52,7 @@ startBtn.addEventListener("click", () => {
         gameDraw("Draw!");
       }
     }, gameDuration * 1000);
-    window.addEventListener("keydown", countKeyDown);
+    window.addEventListener("keyup", countKeyDown);
   } else {
     alert("Enter game duration in seconds!");
   }
@@ -75,7 +75,7 @@ resetBtn.addEventListener("click", () => {
 });
 
 function gameDraw(message) {
-  gameMessage.innerText = "Game result: " + message;
+  gameMessage.innerText = `Game result:  ${message}`;
   sBlock.classList.add("draw");
   jBlock.classList.add("draw");
 }
