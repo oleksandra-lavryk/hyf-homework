@@ -1,0 +1,28 @@
+{
+  "board-games": [
+    {
+      "name": "Catan",
+      "brand": "Catan Studio",
+      "ages": "10+",
+      "players": "3-4"
+    },
+    {
+      "name": "Scrabble",
+      "brand": "Hasbro Gaming",
+      "ages": "8+",
+      "players": "2-4"
+    },
+    {
+      "name": "Ticket to Ride",
+      "brand": "Days of Wonder",
+      "ages": "8+",
+      "players": "2-5"
+    },
+    {
+      "name": "Monopoly",
+      "brand": "Monopoly",
+      "ages": "8+",
+      "players": "2-6"
+    }
+  ]
+}
