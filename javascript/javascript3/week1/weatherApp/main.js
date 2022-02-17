@@ -35,23 +35,27 @@ byPositionBtn.addEventListener("click", () => {
     (currentPosition) => {
       const currentLatitude = currentPosition.coords.latitude;
       const currentLongitude = currentPosition.coords.longitude;
-      (async function () {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&appid=${apiKey}&units=metric`
-        );
-        if (response.ok) {
-          const content = await response.json();
-          showWeather(content);
-        } else {
-          alert("Sorry, information not found!");
-        }
-      })();
-      initMap(currentLongitude, currentLatitude);
+      localStorage.setItem("lon", currentLongitude);
+      localStorage.setItem("lat", currentLatitude);
+      showWeatherByPosition(currentLongitude, currentLatitude);
     },
     (error) => alert(error.message)
   );
 });
-
+function showWeatherByPosition(lon, lat) {
+  (async function () {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+    );
+    if (response.ok) {
+      const content = await response.json();
+      showWeather(content);
+      initMap(lon, lat);
+    } else {
+      alert("Sorry, information not found!");
+    }
+  })();
+}
 function showWeather(content) {
   document.getElementById("city-name").innerText = content.name;
   let sunRiseDate = new Date(content.sys.sunrise * 1000);
@@ -79,14 +83,25 @@ function showWeather(content) {
     "sun-set"
   ).innerText = `Sunrset at: ${sunSetDate.toLocaleTimeString()}`;
   resultBlock.style.opacity = "1";
+  localStorage.setItem("lon", content.coord.lon);
+  localStorage.setItem("lat", content.coord.lat);
+
   if (showMap.checked) {
     initMap(content.coord.lon, content.coord.lat);
   }
 }
+
 function initMap(lon, lat) {
   map = new google.maps.Map(document.getElementById("map-container"), {
     center: { lat: lat, lng: lon },
     zoom: 12,
   });
   document.getElementById("map-container").style.opacity = "1";
+}
+
+if (localStorage.getItem("lon") && localStorage.getItem("lat")) {
+  showWeatherByPosition(
+    Number(localStorage.getItem("lon")),
+    Number(localStorage.getItem("lat"))
+  );
 }
