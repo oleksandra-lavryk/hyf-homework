@@ -5,8 +5,8 @@ const gifContainer = document.getElementById("gif-result-conatiner");
 const apiKey = "dr8wkOEpX1Ws8a5AdjQdA8iBQrZumR3q";
 
 searchBtn.addEventListener("click", () => {
-  if (wordInput === "") {
-    alert("Input a word");
+  if (wordInput.value == "") {
+    alert("Enter a word");
   } else {
     (async function () {
       const response = await fetch(

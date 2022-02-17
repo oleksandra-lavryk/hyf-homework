@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,700&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 30px;
+}
+
+ul li::marker {
+  color: rgb(140, 17, 255);
+  font-size: 20px;
+}
+
+p {
+  font-weight: 600;
+}
+
+.one-tab {
+  padding-left: 20px;
+}
+
+.two-tabs {
+  padding-left: 40px;
+
+}

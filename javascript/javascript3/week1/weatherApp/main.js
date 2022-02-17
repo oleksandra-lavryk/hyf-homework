@@ -4,6 +4,7 @@ const cityInput = document.querySelector("input");
 const weatherIcon = document.getElementById("weather-icon");
 const resultBlock = document.querySelector(".weather-result-container");
 const showMap = document.getElementById("show-map");
+const apiKey = "5a9f05de702d708299f07803e54ed74d";
 let map;
 
 getCityBtn.addEventListener("click", () => {
@@ -15,7 +16,7 @@ getCityBtn.addEventListener("click", () => {
   } else {
     (async function () {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&appid=5a9f05de702d708299f07803e54ed74d&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&appid=${apiKey}&units=metric`
       );
       if (response.ok) {
         const content = await response.json();
@@ -36,7 +37,7 @@ byPositionBtn.addEventListener("click", () => {
       const currentLongitude = currentPosition.coords.longitude;
       (async function () {
         const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&appid=5a9f05de702d708299f07803e54ed74d&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&appid=${apiKey}&units=metric`
         );
         if (response.ok) {
           const content = await response.json();
