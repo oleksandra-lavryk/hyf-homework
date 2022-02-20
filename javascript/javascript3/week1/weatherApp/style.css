@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  width: 700px;
+  max-width: 100%;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.control-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 30px;
+}
+
+
+.weather-result-container {
+  opacity: 0;
+  transition: all .2s ease;
+  width: 400px;
+  margin: auto;
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 40px;
+  margin-top: 20px;
+  background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
+}
+
+#current-temp {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+#weather-icon {
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+}
+
+#city-name,
+#today-date {
+  text-align: center;
+}
+
+.weather-result-container p {
+  margin: 10px 0;
+}
+
+#city-name {
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+#map-container {
+  margin-top: 20px;
+  height: 300px;
+  opacity: 0;
+  transition: all .2s ease;
+}
+
+input[type="text"],
+button {
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 0;
+  border: 1px solid #000000;
+  height: 30px;
+  padding: 0 10px;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background-color: #6a85b6;
+  color: #ffffff;
+  padding: 0 25px;
+  text-transform: uppercase;
+}
+
+input:focus {
+  outline: none;
+}
