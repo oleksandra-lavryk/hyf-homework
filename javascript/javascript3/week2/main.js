@@ -21,3 +21,21 @@ fetch(
     console.log(badMovies);
     console.log(badMoviesSinse);
   });
+
+// Promise that resolves after set time
+function executeInSomeTime(resolveAfter) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, resolveAfter * 1000);
+  });
+}
+
+executeInSomeTime(5).then(() => {
+  console.log("I am called asynchronously"); // logged out after 8 seconds
+});
+
+(async function () {
+  await executeInSomeTime(2);
+  console.log("I am called asynchronously with async");
+})();
