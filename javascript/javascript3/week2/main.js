@@ -39,3 +39,41 @@ executeInSomeTime(5).then(() => {
   await executeInSomeTime(2);
   console.log("I am called asynchronously with async");
 })();
+
+// Rewrite time
+
+function setTimeoutPromise(timeInSeconds) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, timeInSeconds);
+  });
+}
+setTimeoutPromise(3000).then(() => {
+  console.log("Called after 3 seconds");
+});
+
+function getCurrentLocation() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (currentPosition) => {
+        resolve({
+          latitude: currentPosition.coords.latitude,
+          longitude: currentPosition.coords.longitude,
+        });
+      },
+      (error) => reject(error.message)
+    );
+  });
+}
+getCurrentLocation()
+  .then((position) => {
+    // called when the users position is found
+    console.log(position);
+  })
+  .catch((error) => {
+    // called if there was an error getting the users location
+    console.log(error);
+  });
+
+// Fetching and waiting
