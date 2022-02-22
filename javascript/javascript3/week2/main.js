@@ -76,4 +76,21 @@ getCurrentLocation()
     console.log(error);
   });
 
-// Fetching and waiting
+// The 3 steps:
+// 1.Wait 3 seconds
+// 2.After 3 seconds fetch some data from any api you like
+// 3.Log out the data from the api
+
+// Fetching and waiting 3 steps with .then
+setTimeoutPromise(3000)
+  .then(() => fetch("https://random.dog/woof.json"))
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+
+// Fetching and waiting 3 steps with  async/await
+(async function () {
+  await setTimeoutPromise(8000);
+  const response = await fetch("https://random.dog/woof.json");
+  const content = await response.json();
+  console.log(content);
+})();
