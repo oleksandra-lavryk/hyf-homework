@@ -63,7 +63,21 @@ const flatscreen = new Product("flat-screen", 5000);
 const pc = new Product("PC", 8000);
 shoppingCart.addProduct(flatscreen);
 shoppingCart.addProduct(pc);
-console.log(shoppingCart.getTotal());
 console.log(shoppingCart.searchProduct("PC"));
-shoppingCart.getUser(1).then((result) => console.log(result));
-shoppingCart.renderProducts();
+
+// Call the getUser function to get a user. When the user has been fetched.
+// Render the products using the renderProducts method.
+// Also render the username and the total price of the products in the shoppingcart.
+
+shoppingCart.getUser(1).then((result) => {
+  console.log(result);
+  document.getElementById("user-container").innerHTML = `
+    <h2>${result.name}</h2>
+    <p>Phone - ${result.phone}</p>
+    <p>Email - ${result.email}</p>
+  `;
+  shoppingCart.renderProducts();
+  document.getElementById(
+    "total"
+  ).innerText = `Total: ${shoppingCart.getTotal()}`;
+});
