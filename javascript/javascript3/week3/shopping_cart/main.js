@@ -4,19 +4,13 @@ class Product {
     this.price = price;
   }
   convertToCurrency(currency) {
-    let convertedPrice = 0;
-    switch (currency.toLowerCase()) {
-      case "usd":
-        convertedPrice = this.price * 0.15;
-        break;
-      case "uah":
-        convertedPrice = this.price * 4.46;
-        break;
-      case "uah":
-        convertedPrice = this.price * 0.13;
-        break;
-    }
-    return convertedPrice;
+    return new Promise((resolve, reject) => {
+      fetch(
+        `https://api.exchangerate.host/convert?from=DKK&to=${currency}&amount=${this.price}`
+      )
+        .then((response) => response.json())
+        .then((data) => resolve(data));
+    });
   }
 }
 
@@ -98,5 +92,13 @@ shoppingCart.getUser(1).then((result) => {
 });
 
 //  Depending on the provided currency return the correct price for the product.
-console.log(flatscreen.convertToCurrency("usd"));
-console.log(flatscreen.convertToCurrency("uah"));
+flatscreen
+  .convertToCurrency("usd")
+  .then((result) =>
+    console.log(`DKK: ${flatscreen.price} -> USD: ${result.result}`)
+  );
+flatscreen
+  .convertToCurrency("uah")
+  .then((result) =>
+    console.log(`DKK: ${flatscreen.price} -> UAH: ${result.result}`)
+  );
