@@ -3,6 +3,21 @@ class Product {
     this.name = name;
     this.price = price;
   }
+  convertToCurrency(currency) {
+    let convertedPrice = 0;
+    switch (currency.toLowerCase()) {
+      case "usd":
+        convertedPrice = this.price * 0.15;
+        break;
+      case "uah":
+        convertedPrice = this.price * 4.46;
+        break;
+      case "uah":
+        convertedPrice = this.price * 0.13;
+        break;
+    }
+    return convertedPrice;
+  }
 }
 
 class ShoppingCart {
@@ -81,3 +96,7 @@ shoppingCart.getUser(1).then((result) => {
     "total"
   ).innerText = `Total: ${shoppingCart.getTotal()}`;
 });
+
+//  Depending on the provided currency return the correct price for the product.
+console.log(flatscreen.convertToCurrency("usd"));
+console.log(flatscreen.convertToCurrency("uah"));
