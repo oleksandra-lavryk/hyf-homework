@@ -9,7 +9,8 @@ class Product {
         `https://api.exchangerate.host/convert?from=DKK&to=${currency}&amount=${this.price}`
       )
         .then((response) => response.json())
-        .then((data) => resolve(data));
+        .then((data) => resolve(data))
+        .catch((error) => reject(error));
     });
   }
 }
@@ -62,7 +63,8 @@ class ShoppingCart {
     return new Promise((resolve, reject) => {
       fetch(`https://jsonplaceholder.typicode.com/users/${user}`)
         .then((response) => response.json())
-        .then((data) => resolve(data));
+        .then((data) => resolve(data))
+        .catch((error) => reject(error));
     });
   }
 }

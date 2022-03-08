@@ -19,6 +19,7 @@ function printReposOnPage(reposArr) {
   });
 }
 
+const gitNames = ["rismita87", "sergii-borodin", "SvitlanaBurlaka"];
 Promise.all([
   fetch("https://api.github.com/search/repositories?q=user:rismita87"),
   fetch("https://api.github.com/search/repositories?q=user:sergii-borodin"),
