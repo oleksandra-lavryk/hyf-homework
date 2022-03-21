@@ -1,26 +1,32 @@
-
-
 -- Get all the tasks assigned to users whose email ends in @spotify.com
 SELECT
-  *
+  task.title, user.name, user.email 
 FROM
   task
 JOIN
+  user_task
+ON
+  task.id = user_task.task_id
+JOIN
   user
 ON
-  task.user_id = user.id
+  user_task.user_id  = user.id
 WHERE
   user.email LIKE "%@spotify.com";
 
 -- Get all the tasks for 'Donald Duck' with status 'Not started'
 SELECT
- *
+ user.name, task.title, status.name
 FROM
   task
+JOIN 
+  user_task
+ON
+  task.id = user_task.task_id
 JOIN
   user
 ON
-  task.user_id = user.id
+  user_task.user_id  = user.id
 JOIN
   status
 ON
@@ -32,13 +38,17 @@ AND
 
 -- Get all the tasks for 'Maryrose Meadows' that were created in september (hint: month(created)=month_number)
 SELECT
- *
+ user.name, task.title, task.created
 FROM
   task
 JOIN
+  user_task
+ON
+  task.id = user_task.task_id
+JOIN
   user
 ON
-  task.user_id = user.id
+  user_task.user_id  = user.id
 WHERE
   user.name LIKE "Maryrose Meadows"
 AND
