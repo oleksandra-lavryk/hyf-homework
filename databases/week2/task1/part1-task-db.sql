@@ -1,8 +1,8 @@
 -- Add a task with these attributes: title, description, created, updated, due_date, status_id, user_id
 INSERT INTO
-  task(title, description, created, updated, due_date, status_id, user_id)
+  task(title, description, created, updated, due_date, status_id)
 VALUES
-  ("Do homework", "must be done before friday night", "2022-03-15 10:01:16", "2022-03-15 10:01:16", "2022-03-18 10:01:16", 1, 6);
+  ("Do homework", "must be done before friday night", "2022-03-15 10:01:16", "2022-03-15 10:01:16", "2022-03-18 10:01:16", 1);
 
 
 -- Change the title of a task
