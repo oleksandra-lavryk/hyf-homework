@@ -13,9 +13,9 @@ WHERE  id = 1;
 
 -- Update a reservation with any id, fx 1. Update any attribute fx the title or multiple attributes
 UPDATE reservation
-SET    contact_phonenumber = '10380781', contact_email = 'line99@test.dk'
+SET    contact_phonenumber = '10380781',
+       contact_email = 'line99@test.dk'
 WHERE  id = 1; 
-
 -- Delete a reservation with any id, fx 1
 DELETE FROM reservation
 WHERE  id = 3; 
