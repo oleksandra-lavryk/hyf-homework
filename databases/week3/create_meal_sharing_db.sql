@@ -17,7 +17,7 @@ CREATE TABLE `meal` (
 CREATE TABLE `review` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, 
   `title` varchar(255) NOT NULL,
-  `description` text NULL, 
+  `description` text NOT NULL, 
   `created_date` date NOT NULL,
   `stars` int(10) unsigned NOT NULL,
   `meal_id` int(10) unsigned NOT NULL,
@@ -48,24 +48,22 @@ VALUES       ('Tuna salad','In a medium bowl, combine tuna, celery, apple, mayon
 INSERT INTO meal(title,description,location,when_time,max_reservations,price,created_date) 
 VALUES      ('Dragon Roll',NULL,'Nyvej 1','2022-03-30 10:30:00',2,30.00,'2022-03-29');
 
--- Get all meals
-SELECT *
-FROM   meal;
+-- Insert data into review  table
+INSERT INTO review(title, description, created_date, stars, meal_id) 
+VALUES      ('Good food', 'Delicious', '2022-03-26 14:30:00', 4, 2);
 
--- Add a new meal
-INSERT INTO  meal(title, description, location, when_time, max_reservations, price, created_date) 
-VALUES      ('Cheesecake', NULL, 'Storegade 11', '2022-03-30 10:30:00', 2, 30.00, '2022-03-29');
+INSERT INTO review(title, description, created_date, stars, meal_id) 
+VALUES      ('Not bad', 'I thought it would taste better', '2022-03-24 21:30:00', 3, 3);
 
- -- Get a meal with any id, fx 1
-SELECT *
-FROM   meal
-WHERE  id = 2; 
+INSERT INTO review(title, description, created_date, stars, meal_id) 
+VALUES      ('The best', 'Awsome', '2022-03-23 21:50:00', 5, 1);
 
--- Update a meal with any id, fx 1. Update any attribute fx the title or multiple attributes
-UPDATE meal
-SET    title = "cheesecake new york"
-WHERE  id = 4; 
+-- Insert data into reservation table
+INSERT INTO reservation(number_of_guests, created_date, contact_phonenumber, contact_name, contact_email, meal_id) 
+VALUES      (3, '2022-03-23 19:30:00', '50280081', 'Line', 'line@test.dk', 1);
 
--- Delete a meal with any id, fx 1
-DELETE FROM meal
-WHERE  id = 4; 
+INSERT INTO reservation(number_of_guests, created_date, contact_phonenumber, contact_name, contact_email, meal_id) 
+VALUES      (3, '2022-03-22 16:12:00', '50480090', 'Torben', 'torben@test.dk', 2);
+
+INSERT INTO reservation(number_of_guests, created_date, contact_phonenumber, contact_name, contact_email, meal_id) 
+VALUES      (5, '2022-03-21 12:30:00', '10280081', 'Ben', 'ben@test.dk', 3);
