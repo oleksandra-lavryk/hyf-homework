@@ -36,7 +36,7 @@ CREATE TABLE `reservation` (
 );
 
 -- Insert data into meal table
-INSERT INTO meal(id,title,when_time,max_reservations,price,created_date) 
+INSERT INTO meal(title,when_time,max_reservations,price,created_date) 
 VALUES      ('Pepperoni','2022-03-23 12:00:00',2,14.95,'2022-03-22');
 
 INSERT INTO meal(title,description,location,when_time,max_reservations,price,created_date) 

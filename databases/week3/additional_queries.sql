@@ -51,10 +51,12 @@ WHERE  reservation.meal_id = 2
 ORDER  BY reservation.created_date DESC; 
 
 -- Sort all meals by average number of stars in the reviews
-SELECT meal.title,
+SELECT meal.id,
        AVG(review.stars) AS review_average
 FROM   meal
        JOIN review
          ON meal.id = review.meal_id
 GROUP  BY meal.title
 ORDER  BY review_average DESC; 
+
+USE meal_sharing;
