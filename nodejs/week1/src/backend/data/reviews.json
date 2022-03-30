@@ -4,6 +4,13 @@
     "numberOfStars": 3,
     "content": "Best meal ever",
     "mealId": 1,
-    "createdAt": 12345
+    "createdAt": "2020/11/3 12:39"
+  },
+  {
+    "id": 2,
+    "numberOfStars": 5,
+    "content": "Best pasta ever",
+    "mealId": 3,
+    "createdAt": "2021/07/7 19:52"
   }
 ]
