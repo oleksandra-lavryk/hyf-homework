@@ -1,16 +1,13 @@
 const meals = require("./data/meals");
 const reviews = require("./data/reviews");
 
-const resultArr = [];
 meals.forEach((meal) => {
-  const newMeal = meal;
-  newMeal["reviews"] = [];
+  meal["reviews"] = [];
   reviews.forEach((review) => {
     if (review.mealId === meal.id) {
-      newMeal["reviews"].push(review);
+      meal["reviews"].push(review);
     }
   });
-  resultArr.push(newMeal);
 });
 
-module.exports.mealsWithReviews = resultArr;
+module.exports.mealsWithReviews = meals;
