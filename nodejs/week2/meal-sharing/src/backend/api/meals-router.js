@@ -12,44 +12,34 @@ router.get("/", async (request, response) => {
     response.send(meals);
   } else {
     let checkParam = false;
-    for (key in queryParams) {
-      switch (key) {
-        case "maxPrice":
-          const maxPrice = Number(queryParams[key]);
-          if (!isNaN(maxPrice) && maxPrice) {
-            filteredMeals = filteredMeals.filter(
-              (item) => item.price < maxPrice
-            );
-            checkParam = true;
-          }
-          break;
-        case "limit":
-          const limit = Number(queryParams[key]);
-          if (!isNaN(limit)) {
-            filteredMeals = filteredMeals.slice(0, limit);
-            checkParam = true;
-          }
-          break;
-        case "title":
-          if (queryParams[key]) {
-            filteredMeals = filteredMeals.filter((item) =>
-              item.title.toLowerCase().includes(queryParams[key].toLowerCase())
-            );
-            checkParam = true;
-          }
-          break;
-        case "createdAfter":
-          const createdAfter = new Date(queryParams[key]);
-          if (createdAfter != "Invalid Date") {
-            filteredMeals = filteredMeals.filter((item) => {
-              const itemDate = new Date(item.createdAt);
-              return itemDate > createdAfter;
-            });
-            checkParam = true;
-          }
-          break;
+    if (queryParams["maxPrice"] && !isNaN(Number(queryParams["maxPrice"]))) {
+      filteredMeals = filteredMeals.filter(
+        (item) => item.price < Number(queryParams["maxPrice"])
+      );
+      checkParam = true;
+    }
+    if (queryParams["title"]) {
+      filteredMeals = filteredMeals.filter((item) =>
+        item.title.toLowerCase().includes(queryParams["title"].toLowerCase())
+      );
+      checkParam = true;
+    }
+    if (queryParams["limit"] && !isNaN(Number(queryParams["limit"]))) {
+      filteredMeals = filteredMeals.slice(0, queryParams["limit"]);
+      checkParam = true;
+    }
+
+    if (queryParams["createdAfter"]) {
+      const createdAfter = Date.parse(queryParams["createdAfter"]);
+      if (createdAfter != "Invalid Date" && !isNaN(createdAfter)) {
+        filteredMeals = filteredMeals.filter((item) => {
+          const itemDate = new Date(item.createdAt);
+          return itemDate > createdAfter;
+        });
+        checkParam = true;
       }
     }
+
     if (checkParam) {
       response.send(filteredMeals);
     } else {
