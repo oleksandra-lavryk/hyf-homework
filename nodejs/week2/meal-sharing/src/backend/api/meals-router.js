@@ -30,8 +30,8 @@ router.get("/", async (request, response) => {
     }
 
     if (queryParams["createdAfter"]) {
-      const createdAfter = Date.parse(queryParams["createdAfter"]);
-      if (createdAfter != "Invalid Date" && !isNaN(createdAfter)) {
+      const createdAfter = new Date(queryParams["createdAfter"]);
+      if (createdAfter != "Invalid Date") {
         filteredMeals = filteredMeals.filter((item) => {
           const itemDate = new Date(item.createdAt);
           return itemDate > createdAfter;
@@ -51,13 +51,12 @@ router.get("/", async (request, response) => {
 router.get("/:id", async (request, response) => {
   const mealid = Number(request.params.id);
   if (!isNaN(mealid) && mealid) {
-    let meal = {};
-    meals.forEach((item) => {
-      if (item.id === mealid) {
-        meal = item;
-      }
-    });
-    response.send(meal);
+    const meal = meals.find((meal) => meal.id === mealid);
+    if (meal) {
+      response.send(meal);
+    } else {
+      response.status(400).json({ error: "Not founded" });
+    }
   } else {
     response.status(400).json({ error: "Invalid params" });
   }

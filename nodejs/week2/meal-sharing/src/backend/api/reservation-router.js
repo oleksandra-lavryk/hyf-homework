@@ -11,13 +11,14 @@ router.get("/", async (request, response) => {
 router.get("/:id", async (request, response) => {
   const reservationId = Number(request.params.id);
   if (!isNaN(reservationId) && reservationId) {
-    let reservation = {};
-    reservations.forEach((item) => {
-      if (item.id === reservationId) {
-        reservation = item;
-      }
-    });
-    response.send(reservation);
+    const reservation = reservations.find(
+      (reservation) => reservation.id === reservationId
+    );
+    if (reservation) {
+      response.send(reservation);
+    } else {
+      response.status(400).json({ error: "Not founded" });
+    }
   } else {
     response.status(400).json({ error: "Invalid data" });
   }

@@ -11,13 +11,12 @@ router.get("/", async (request, response) => {
 router.get("/:id", async (request, response) => {
   const reviewId = Number(request.params.id);
   if (!isNaN(reviewId) && reviewId) {
-    let review = {};
-    reviews.forEach((item) => {
-      if (item.id === reviewId) {
-        review = item;
-      }
-    });
-    response.send(review);
+    const review = reviews.find((review) => review.id === reviewId);
+    if (review) {
+      response.send(review);
+    } else {
+      response.status(400).json({ error: "Not founded" });
+    }
   } else {
     response.status(400).json({ error: "Invalid data" });
   }
