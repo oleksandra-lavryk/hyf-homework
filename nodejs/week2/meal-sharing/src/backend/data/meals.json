@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Indian food in the summer",
+    "maxNumberOfGuests": 5,
+    "description": "A nice night out eating delicious indian food",
+    "createdAt": "2019/12/7 14:34",
+    "price": 67
+  },
+  {
+    "id": 2,
+    "title": "Tuna Sandwich",
+    "maxNumberOfGuests": 2,
+    "description": "Sandwich with tuna and vegetables",
+    "createdAt": "2020/02/20 15:15",
+    "price": 49
+  },
+  {
+    "id": 3,
+    "title": "Pasta Primavera",
+    "maxNumberOfGuests": 4,
+    "description": "Pasta primavera is a simple dish made with pasta and fresh vegetables",
+    "createdAt": "2021/10/5 17:10",
+    "price": 59
+  }
+]
