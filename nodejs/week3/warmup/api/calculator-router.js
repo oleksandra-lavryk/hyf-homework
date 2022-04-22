@@ -36,6 +36,14 @@ function makeCalculation(requestQuery, response, action, initialValue) {
     response.send({ Message: "No parameters" });
     return;
   }
+  if (Object.values(requestQuery).length < 2 && action === "/") {
+    response.send({ Message: "Has to be minimum 2 parameters for division" });
+    return;
+  }
+  if (Object.values(requestQuery).includes("0") && action === "/") {
+    response.send({ Message: "Division by zero" });
+    return;
+  }
   let result;
   switch (action) {
     case "+":
