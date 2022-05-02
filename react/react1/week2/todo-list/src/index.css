@@ -13,5 +13,13 @@ code {
 }
 
 .list {
-  list-style-type: none;
+  padding-left: 20px;
+}
+
+.list-item {
+  margin-bottom: 10px;
+}
+
+.list-item button {
+  margin-left: 15px;
 }
