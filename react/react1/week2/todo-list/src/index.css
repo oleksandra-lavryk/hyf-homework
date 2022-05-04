@@ -23,3 +23,7 @@ code {
 .list-item button {
   margin-left: 15px;
 }
+
+.list-item.checked {
+  text-decoration: line-through;
+}

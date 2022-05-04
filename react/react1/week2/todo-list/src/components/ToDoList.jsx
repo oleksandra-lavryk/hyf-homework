@@ -1,51 +1,69 @@
 import TaskItem from "./TaskItem";
 import tasklist from "../data/tasklist";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function ToDoList() {
   const [items, setItems] = useState(tasklist);
 
-  function addItem() {
+  const [checkBoxState, setCheckBoxState] = useState(
+    new Array(items.length).fill(false)
+  );
+
+  const addItem = () => {
     setItems((prevItems) => {
       return [
         ...prevItems,
         {
           id: new Date().getTime(),
           description: "Random task ",
-          deadline: "Date",
         },
       ];
     });
-  }
-
-  function deleteItem(idToDelete) {
-    setItems((prevItems) => {
-      return prevItems.filter((item) => item.id != idToDelete);
+    setCheckBoxState((prevCheckBoxState) => {
+      return [...prevCheckBoxState, false];
     });
-  }
+  };
+  const deleteItem = (idToDelete) => {
+    setItems((prevItems) => {
+      const changetItems = [...prevItems].filter(
+        (item) => item.id != idToDelete
+      );
+      return changetItems;
+    });
+  };
 
-  function DeleteButton(props) {
-    return <button onClick={() => deleteItem(props.forDelete)}>Delete</button>;
-  }
-
-  // if (items.length === 0) {
-  //   return <p>No items in toDo list</p>;
-  // } else {
-
+  const deleteCheckBoxState = (indextoDel) => {
+    setCheckBoxState((prevCheckBoxState) => {
+      const changedCheckStateArr = [...prevCheckBoxState];
+      changedCheckStateArr.splice(indextoDel, 1);
+      return changedCheckStateArr;
+      // return prevCheckBoxState.splice(indextoDel, 1); //not working
+    });
+  };
+  const handleInputChange = (position) => {
+    setCheckBoxState((prevCheckBoxState) => {
+      return prevCheckBoxState.map((item, index) =>
+        index === position ? !item : item
+      );
+    });
+  };
   return (
     <>
       <button onClick={() => addItem()}>Add random task</button>
       <ul className="list">
         {items.length ? (
-          items.map((item) => {
+          items.map((item, index) => {
             return (
-              <li key={item.id} className="list-item">
-                <TaskItem
-                  description={item.description}
-                  deadline={item.deadline}
-                />
-                <DeleteButton forDelete={item.id} />
-              </li>
+              <TaskItem
+                key={item.id}
+                checked={checkBoxState[index]}
+                description={item.description}
+                itemid={item.id}
+                itemindex={index}
+                handleInputChange={handleInputChange}
+                deleteItem={deleteItem}
+                deleteCheckBoxState={deleteCheckBoxState}
+              />
             );
           })
         ) : (
