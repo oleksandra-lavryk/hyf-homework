@@ -1,11 +1,9 @@
 export default function TaskItem({
   checked,
   description,
-  itemid,
-  itemindex,
+  itemId,
   handleInputChange,
   deleteItem,
-  deleteCheckBoxState,
 }) {
   return (
     <li className={checked ? "list-item checked" : "list-item"}>
@@ -13,12 +11,11 @@ export default function TaskItem({
       <input
         type="checkbox"
         checked={checked}
-        onChange={() => handleInputChange(itemindex)}
+        onChange={() => handleInputChange(itemId)}
       />
       <button
         onClick={() => {
-          deleteItem(itemid);
-          deleteCheckBoxState(itemindex);
+          deleteItem(itemId);
         }}
       >
         Delete
@@ -26,5 +23,3 @@ export default function TaskItem({
     </li>
   );
 }
-
-// Using life cycles, set up a timer that counts how long time a users has spent on the website.

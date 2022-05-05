@@ -3,11 +3,11 @@ import tasklist from "../data/tasklist";
 import { useState } from "react";
 
 export default function ToDoList() {
-  const [items, setItems] = useState(tasklist);
+  const setTaskList = () => {
+    return tasklist.map((item) => ({ ...item, isChecked: false })); //why like is is working? spread operator
+  };
 
-  const [checkBoxState, setCheckBoxState] = useState(
-    new Array(items.length).fill(false)
-  );
+  const [items, setItems] = useState(() => setTaskList());
 
   const addItem = () => {
     setItems((prevItems) => {
@@ -16,53 +16,42 @@ export default function ToDoList() {
         {
           id: new Date().getTime(),
           description: "Random task ",
+          isChecked: false,
         },
       ];
-    });
-    setCheckBoxState((prevCheckBoxState) => {
-      return [...prevCheckBoxState, false];
     });
   };
   const deleteItem = (idToDelete) => {
     setItems((prevItems) => {
-      const changetItems = [...prevItems].filter(
-        (item) => item.id != idToDelete
-      );
-      return changetItems;
+      return prevItems.filter((item) => item.id != idToDelete);
     });
   };
 
-  const deleteCheckBoxState = (indextoDel) => {
-    setCheckBoxState((prevCheckBoxState) => {
-      const changedCheckStateArr = [...prevCheckBoxState];
-      changedCheckStateArr.splice(indextoDel, 1);
-      return changedCheckStateArr;
-      // return prevCheckBoxState.splice(indextoDel, 1); //not working
+  const handleInputChange = (itemId) => {
+    const markDoneArr = [...items];
+    markDoneArr.map((item) => {
+      if (item.id === itemId) {
+        item.isChecked = !item.isChecked;
+      }
+      return item;
     });
+    setItems(markDoneArr);
   };
-  const handleInputChange = (position) => {
-    setCheckBoxState((prevCheckBoxState) => {
-      return prevCheckBoxState.map((item, index) =>
-        index === position ? !item : item
-      );
-    });
-  };
+
   return (
     <>
-      <button onClick={() => addItem()}>Add random task</button>
+      <button onClick={addItem}>Add random task</button>
       <ul className="list">
         {items.length ? (
-          items.map((item, index) => {
+          items.map((item) => {
             return (
               <TaskItem
                 key={item.id}
-                checked={checkBoxState[index]}
+                checked={item.isChecked}
                 description={item.description}
-                itemid={item.id}
-                itemindex={index}
+                itemId={item.id}
                 handleInputChange={handleInputChange}
                 deleteItem={deleteItem}
-                deleteCheckBoxState={deleteCheckBoxState}
               />
             );
           })
