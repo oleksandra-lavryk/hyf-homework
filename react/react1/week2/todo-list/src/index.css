@@ -27,3 +27,12 @@ code {
 .list-item.checked {
   text-decoration: line-through;
 }
+
+.task-input {
+  margin-right: 10px;
+}
+
+.input-error {
+  color: red;
+  margin-top: 3px;
+}

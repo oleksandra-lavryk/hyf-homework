@@ -8,18 +8,25 @@ export default function ToDoList() {
   };
 
   const [items, setItems] = useState(() => setTaskList());
+  const [inputTaskValue, setInputTaskValue] = useState("");
+  const [inputError, setInputError] = useState("");
 
   const addItem = () => {
-    setItems((prevItems) => {
-      return [
-        ...prevItems,
-        {
-          id: new Date().getTime(),
-          description: "Random task ",
-          isChecked: false,
-        },
-      ];
-    });
+    if (inputTaskValue === "") {
+      setInputError("No data entered");
+    } else {
+      setInputError("");
+      setItems((prevItems) => {
+        return [
+          ...prevItems,
+          {
+            id: new Date().getTime(),
+            description: inputTaskValue,
+            isChecked: false,
+          },
+        ];
+      });
+    }
   };
   const deleteItem = (idToDelete) => {
     setItems((prevItems) => {
@@ -38,9 +45,23 @@ export default function ToDoList() {
     setItems(markDoneArr);
   };
 
+  const handleinputTaskValue = (e) => {
+    setInputTaskValue(e.target.value);
+  };
+
   return (
     <>
-      <button onClick={addItem}>Add random task</button>
+      <input
+        className="task-input"
+        type="text"
+        placeholder="Enter task name"
+        value={inputTaskValue}
+        onChange={handleinputTaskValue}
+      />
+      <button type="button" onClick={addItem}>
+        Add task
+      </button>
+      <div class="input-error">{inputError}</div>
       <ul className="list">
         {items.length ? (
           items.map((item) => {
