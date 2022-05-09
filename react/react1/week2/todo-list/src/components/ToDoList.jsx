@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function ToDoList() {
   const setTaskList = () => {
-    return tasklist.map((item) => ({ ...item, isChecked: false })); //why like is is working? spread operator
+    return tasklist.map((item) => ({ ...item, isChecked: false }));
   };
 
   const [items, setItems] = useState(() => setTaskList());
