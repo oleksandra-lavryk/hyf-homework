@@ -35,9 +35,14 @@ code {
 .input-error {
   color: red;
   margin-top: 3px;
+  font-size: 12px;
 }
 
 .list-item-text {
   display: inline-block;
   width: 250px;
+}
+
+.input-error-deadline {
+  margin-left: 190px;
 }

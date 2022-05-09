@@ -1,17 +1,15 @@
-export default function TaskItem({
-  checked,
-  description,
-  deadline,
-  handleInputChange,
-  deleteItem,
-}) {
+export default function TaskItem(props) {
   return (
-    <li className={checked ? "list-item checked" : "list-item"}>
+    <li className={props.checked ? "list-item checked" : "list-item"}>
       <div className="list-item-text">
-        {description} | {deadline}
+        {props.description} | {props.deadline}
       </div>
-      <input type="checkbox" checked={checked} onChange={handleInputChange} />
-      <button onClick={deleteItem}>Delete</button>
+      <input
+        type="checkbox"
+        checked={props.checked}
+        onChange={props.handleInputChange}
+      />
+      <button onClick={props.deleteItem}>Delete</button>
       <button>Edit</button>
     </li>
   );

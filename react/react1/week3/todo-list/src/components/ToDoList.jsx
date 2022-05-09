@@ -1,11 +1,14 @@
 import TaskItem from "./TaskItem";
-import tasklist from "../data/tasklist";
+import AddTask from "./AddTask";
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 
 export default function ToDoList() {
   const [items, setItems] = useState([]);
   const [inputTaskValue, setInputTaskValue] = useState("");
-  const [inputError, setInputError] = useState("");
+  const [inputTaskDeadline, setInputTaskDeadline] = useState("");
+  const [inputTaskError, setInputTaskError] = useState("");
+  const [inputDeadlineError, setInputDeadlineError] = useState("");
 
   useEffect(() => {
     fetch(
@@ -23,21 +26,28 @@ export default function ToDoList() {
 
   const addItem = () => {
     if (inputTaskValue === "") {
-      setInputError("No data entered");
-    } else {
-      setInputError("");
-      setItems((prevItems) => {
-        return [
-          ...prevItems,
-          {
-            id: new Date().getTime(),
-            deadline: "2022-05-21",
-            description: inputTaskValue,
-            isChecked: false,
-          },
-        ];
-      });
+      setInputDeadlineError("");
+      setInputTaskError("Enter task name");
+      return;
     }
+    if (inputTaskDeadline === "") {
+      setInputTaskError("");
+      setInputDeadlineError("Enter task deadline");
+      return;
+    }
+    setInputTaskError("");
+    setInputDeadlineError("");
+    setItems((prevItems) => {
+      return [
+        ...prevItems,
+        {
+          id: new Date().getTime(),
+          deadline: inputTaskDeadline,
+          description: inputTaskValue,
+          isChecked: false,
+        },
+      ];
+    });
   };
   const deleteItem = (idToDelete) => {
     setItems((prevItems) => {
@@ -59,20 +69,21 @@ export default function ToDoList() {
   const handleinputTaskValue = (e) => {
     setInputTaskValue(e.target.value);
   };
+  const handleinputTaskDeadline = (e) => {
+    setInputTaskDeadline(e.target.value);
+  };
 
   return (
     <>
-      <input
-        className="task-input"
-        type="text"
-        placeholder="Enter task name"
-        value={inputTaskValue}
-        onChange={handleinputTaskValue}
+      <AddTask
+        addItem={addItem}
+        inputTaskValue={inputTaskValue}
+        inputTaskDeadline={inputTaskDeadline}
+        inputTaskError={inputTaskError}
+        inputDeadlineError={inputDeadlineError}
+        handleinputTaskValue={handleinputTaskValue}
+        handleinputTaskDeadline={handleinputTaskDeadline}
       />
-      <button type="button" onClick={addItem}>
-        Add task
-      </button>
-      <div className="input-error">{inputError}</div>
       <ul className="list">
         {items.length ? (
           items.map((item) => {
@@ -82,7 +93,6 @@ export default function ToDoList() {
                 checked={item.isChecked}
                 description={item.description}
                 deadline={item.deadline}
-                itemId={item.id}
                 handleInputChange={() => handleInputChange(item.id)}
                 deleteItem={() => deleteItem(item.id)}
               />
@@ -95,3 +105,10 @@ export default function ToDoList() {
     </>
   );
 }
+
+TaskItem.propTypes = {
+  checked: PropTypes.bool,
+  description: PropTypes.string,
+  deadline: PropTypes.string,
+  handleInputChange: PropTypes.func,
+};
