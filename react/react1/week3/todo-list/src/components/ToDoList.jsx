@@ -1,15 +1,25 @@
 import TaskItem from "./TaskItem";
 import tasklist from "../data/tasklist";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ToDoList() {
-  const setTaskList = () => {
-    return tasklist.map((item) => ({ ...item, isChecked: false })); //why like is is working? spread operator
-  };
-
-  const [items, setItems] = useState(() => setTaskList());
+  const [items, setItems] = useState([]);
   const [inputTaskValue, setInputTaskValue] = useState("");
   const [inputError, setInputError] = useState("");
+
+  useEffect(() => {
+    fetch(
+      "https://gist.githubusercontent.com/benna100/391eee7a119b50bd2c5960ab51622532/raw"
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setItems(
+          result.map((item) => {
+            return { ...item, isChecked: false };
+          })
+        );
+      });
+  }, []);
 
   const addItem = () => {
     if (inputTaskValue === "") {
@@ -21,6 +31,7 @@ export default function ToDoList() {
           ...prevItems,
           {
             id: new Date().getTime(),
+            deadline: "2022-05-21",
             description: inputTaskValue,
             isChecked: false,
           },
@@ -61,7 +72,7 @@ export default function ToDoList() {
       <button type="button" onClick={addItem}>
         Add task
       </button>
-      <div class="input-error">{inputError}</div>
+      <div className="input-error">{inputError}</div>
       <ul className="list">
         {items.length ? (
           items.map((item) => {
@@ -70,9 +81,10 @@ export default function ToDoList() {
                 key={item.id}
                 checked={item.isChecked}
                 description={item.description}
+                deadline={item.deadline}
                 itemId={item.id}
-                handleInputChange={handleInputChange}
-                deleteItem={deleteItem}
+                handleInputChange={() => handleInputChange(item.id)}
+                deleteItem={() => deleteItem(item.id)}
               />
             );
           })
