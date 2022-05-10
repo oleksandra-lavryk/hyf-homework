@@ -14,6 +14,7 @@ code {
 
 .list {
   padding-left: 20px;
+  max-width: 500px;
 }
 
 .list-item {
@@ -22,6 +23,7 @@ code {
 
 .list-item button {
   margin-left: 15px;
+  width: 70px;
 }
 
 .list-item.checked .list-item-text {
@@ -41,6 +43,11 @@ code {
 .list-item-text {
   display: inline-block;
   width: 250px;
+}
+
+.list-item-bordered {
+  border: 1px solid #000000;
+  padding: 5px;
 }
 
 .input-error-deadline {

@@ -73,6 +73,17 @@ export default function ToDoList() {
     setInputTaskDeadline(e.target.value);
   };
 
+  const updateItem = (itemId, updateValue) => {
+    const updatedItems = [...items];
+    updatedItems.map((item) => {
+      if (item.id === itemId) {
+        item.description = updateValue;
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
   return (
     <>
       <AddTask
@@ -90,10 +101,12 @@ export default function ToDoList() {
             return (
               <TaskItem
                 key={item.id}
+                itemId={item.id}
                 checked={item.isChecked}
                 description={item.description}
                 deadline={item.deadline}
                 handleInputChange={() => handleInputChange(item.id)}
+                updateItem={updateItem}
                 deleteItem={() => deleteItem(item.id)}
               />
             );
