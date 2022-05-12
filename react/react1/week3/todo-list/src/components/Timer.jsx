@@ -8,7 +8,7 @@ export default function Timer() {
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [time]);
 
   return <p>You are {time} seconds on this page</p>;
 }

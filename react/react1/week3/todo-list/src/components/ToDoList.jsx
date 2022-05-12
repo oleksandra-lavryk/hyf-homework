@@ -10,7 +10,18 @@ export default function ToDoList() {
   const [inputTaskError, setInputTaskError] = useState("");
   const [inputDeadlineError, setInputDeadlineError] = useState("");
 
+  function formatDate(date) {
+    let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    let month =
+      date.getMonth() + 1 < 10
+        ? "0" + (date.getMonth() + 1)
+        : date.getMonth() + 1;
+    return date.getFullYear() + "-" + month + "-" + day;
+  }
+
   useEffect(() => {
+    let today = new Date();
+    setInputTaskDeadline(formatDate(today));
     fetch(
       "https://gist.githubusercontent.com/benna100/391eee7a119b50bd2c5960ab51622532/raw"
     )
@@ -56,14 +67,14 @@ export default function ToDoList() {
   };
 
   const handleInputChange = (itemId) => {
-    const markDoneArr = [...items];
-    markDoneArr.map((item) => {
+    const itemsChecked = [...items];
+    itemsChecked.map((item) => {
       if (item.id === itemId) {
         item.isChecked = !item.isChecked;
       }
       return item;
     });
-    setItems(markDoneArr);
+    setItems(itemsChecked);
   };
 
   const handleinputTaskValue = (e) => {

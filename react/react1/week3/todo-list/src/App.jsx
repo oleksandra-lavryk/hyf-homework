@@ -7,7 +7,7 @@ import Timer from "./components/Timer";
 function App() {
   return (
     <div className="App">
-      {/* <Timer /> */}
+      <Timer />
       <ListName name="My ToDo List" />
       <ToDoList />
     </div>

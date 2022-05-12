@@ -6,10 +6,17 @@ function TaskItemBorder(props) {
 export default function TaskItem(props) {
   const [changeInput, setChangeInput] = useState(false);
   const [updateValue, setUpdateValue] = useState(props.description);
+  const [inputValueError, setInputValueError] = useState("");
+
   const handleChangeInput = () => {
     setChangeInput(true);
   };
   const saveUpdateValue = () => {
+    if (updateValue === "") {
+      setInputValueError("Enter task name");
+      return;
+    }
+    setInputValueError("");
     setChangeInput(false);
     props.updateItem(props.itemId, updateValue);
   };
@@ -20,12 +27,15 @@ export default function TaskItem(props) {
     <li className={props.checked ? "list-item checked" : "list-item"}>
       <TaskItemBorder>
         {changeInput ? (
-          <input
-            type="text"
-            checked={false}
-            value={updateValue}
-            onChange={handleUpdateValue}
-          />
+          <>
+            <input
+              type="text"
+              checked={false}
+              value={updateValue}
+              onChange={handleUpdateValue}
+            />
+            <span className="input-error">{inputValueError}</span>
+          </>
         ) : (
           <div className="list-item-text">
             {props.description} | {props.deadline}
