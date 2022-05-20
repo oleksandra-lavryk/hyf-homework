@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { gitSearcherContext } from "./GitSearcherContext";
 
-export default function GitUsersList({ usersList }) {
-  const [listEmpty, setListEmpty] = useState(false);
-  useEffect(() => {
-    usersList.length === 0 ? setListEmpty(true) : setListEmpty(false);
-  }, [usersList]);
+export default function GitUsersList() {
+  const contextValues = useContext(gitSearcherContext);
+
   return (
     <>
-      {listEmpty ? (
+      {contextValues.isUsersEmpty ? (
         <p>No results</p>
       ) : (
-        usersList.map((user) => {
+        contextValues.usersList.map((user) => {
           return <div key={user.id}>{user.login}</div>;
         })
       )}
