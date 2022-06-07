@@ -1,13 +1,10 @@
 tomato
 potato
-<<<<<<< HEAD
 pepper
 carrot
 onion
 cabbage
 eggplant
-=======
 asparagus
 carrot
 onion
->>>>>>> 2047d7586486f1be486b922060b55f6b13a8bc29
