@@ -1,15 +1,15 @@
 import { useContext } from "react";
-import { gitSearcherContext } from "./GitSearcherContext";
+import { GitSearcherContext } from "./GitSearcherProvider";
 
 export default function GitUsersList() {
-  const contextValues = useContext(gitSearcherContext);
-
+  const { users, isLoading } = useContext(GitSearcherContext);
   return (
     <>
-      {contextValues.isUsersEmpty ? (
+      {isLoading ? <p>Loading...</p> : ""}
+      {users.length === 0 ? (
         <p>No results</p>
       ) : (
-        contextValues.usersList.map((user) => {
+        users.map((user) => {
           return <div key={user.id}>{user.login}</div>;
         })
       )}

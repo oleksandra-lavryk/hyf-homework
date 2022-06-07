@@ -1,15 +1,11 @@
 import { useContext } from "react";
-import { gitSearcherContext } from "./GitSearcherContext";
+import { GitSearcherContext } from "./GitSearcherProvider";
 
 export default function SearchBar() {
-  const contextValues = useContext(gitSearcherContext);
+  const { searchOnChange } = useContext(GitSearcherContext);
   return (
     <>
-      <input
-        type="text"
-        placeholder="Search user"
-        onChange={contextValues.searchChange}
-      />
+      <input type="text" placeholder="Search user" onChange={searchOnChange} />
     </>
   );
 }
