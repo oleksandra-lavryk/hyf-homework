@@ -1,5 +1,10 @@
 tomato
 potato
+pepper
+carrot
+onion
+cabbage
+eggplant
 asparagus
 carrot
 onion
